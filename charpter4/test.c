@@ -2,8 +2,7 @@
 #include <limits.h>
 #include <malloc.h>
 #include "FIND-MAXIMUM-SUBARRAY.c"
-#include "SQUARE-MATRIX-MUTIPLY.c"
-
+#include "Strassen_method.c"
 int main()
 {
     int a[] = {13, -3, -25, 20, -3, -16, -23, 18, 20, -7, 12, -5, -22, 15, -4, 7};
@@ -28,4 +27,23 @@ int main()
             printf("%d ", m[i][j]);
         printf("\n");
     }
+    printf("\n");
+
+    int** A = init_matrix(2);
+    int** B = init_matrix(2);
+    A[0][0]=1;
+    A[0][1]=3;
+    A[1][0]=7;
+    A[1][1]=5;
+
+    B[0][0]=6;
+    B[0][1]=8;
+    B[1][0]=4;
+    B[1][1]=2;
+    int** C = square_matrix_mutiply_recursive(A, B, 2);
+    print_matrix(C, 2, 2);
+
+    int** D = Strassen_method(A, B, 2);
+    print_matrix(D, 2, 2);
+
 }
