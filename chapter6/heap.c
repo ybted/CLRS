@@ -118,3 +118,46 @@ void heapsort(int a[], int len)
     for (int i = 0; i < len; i ++)
         a[i] = h->a[i];
 }
+
+int heap_maximum(heap a)
+{
+    return a.a[0];
+}
+
+int heap_extract_max(heap* a)
+{
+    if (a->heap_size < 1) {
+        printf("heap underflow");
+        return -1;
+    }
+    int max = a->a[0];
+    a->a[0] = a->a[a->heap_size - 1];
+    a->heap_size -- ;
+    max_heapify(a, 0);
+    return max;
+}
+
+void heap_increase_key(heap *a, int i, int key)
+{
+    if (key < a->a[i])
+    {
+        printf("new key is smaller tham current key\n");
+        return ;
+    }
+    a->a[i] = key;
+    while (i > 0 && a->a[parent(i)] < a->a[i])
+    {
+        int temp = a->a[parent(i)];
+        a->a[parent(i)] = a->a[i];
+        a->a[i] = temp;
+        i = parent(i);
+    }
+}
+
+
+void max_heap_insert(heap* a, int key)
+{
+    a->heap_size ++ ;
+    a->a[a->heap_size - 1] = INT_MIN;
+    heap_increase_key(a, a->heap_size - 1, key);
+}
